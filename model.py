@@ -1,7 +1,7 @@
 import os
 import json
 import hashlib
-from base64 import b64encode
+from base64 import b64encode, b64decode
 
 
 
@@ -54,6 +54,32 @@ class Uporabnik:
         with open(datoteka, 'w+', encoding='UTF-8') as dat:
             slovar = self.v_slovar()
             json.dump(slovar, dat, ensure_ascii=False, indent=4)
+    
+    def prijava(self):
+        datoteka = 'uporabniki/' + self.u_ime + '.json'
+        if os.path.isfile(datoteka) == False:
+            napaka = 'Prijava ni uspela.'
+            return False
+        else:
+            if self.preveri_geslo() == True:
+                return True
+            else:
+                napaka = 'Prijava ni uspela.'
+                return False
+                
+
+#        with open(datoteka, 'r', encoding='UTF-8') as dat:
+#            s = b64decode(json.loads(dat.read())['u_geslo']['geslo']['sol'])
+#            z_geslo = hashlib.pbkdf2_hmac('sha256', self.u_geslo.encode('UTF-8'), s, 100000)
+#            if z_geslo == json.loads(dat.read())['u_geslo']['geslo']['kljuc']:
+#                return True
+#            else:
+#                return False
+
+    def preveri_geslo(self):
+        datoteka = 'uporabniki/' + self.u_ime + '.json'
+        with open(datoteka, 'r', encoding='UTF-8') as dat:
+
 
 class Administrator(Uporabnik):
     pass
