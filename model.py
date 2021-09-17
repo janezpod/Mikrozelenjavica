@@ -19,8 +19,12 @@ class Stanje:
         self.administratorji = []
         self.narocila = []
         self.zelenjavica = [
-            {'zap_stevilo': 1, 'vrsta': 'Test', 'cena': 3.5, 'faza': (3,4)}
+            {'zaporedno_stevilo': 1, 'vrsta': 'Test', 'cena': 3.5, 'faza': [3,4]}
         ]
+    
+    def ustvari_zelenjavico(self, vrsta, cena, faza):
+        nova_zelenjavica = {'zaporedno_stevilo': len(Stanje.zelenjavica) + 1, 'vrsta': vrsta, 'cena': cena, 'faza': faza}
+        return Stanje.zelenjavica.append(nova_zelenjavica)
 
     def ustvari_narocilo(self, narocilo):
         pass
@@ -35,7 +39,12 @@ class Stanje:
         pass
 
 class Narocilo:
-    pass
+    def __init__(self, narocnik, datum_narocila, datum_dostave, artikli):
+        self.narocnik = narocnik
+        self.datum_narocila = datum_narocila
+        self.datum_dostave = datum_dostave
+        self.artikli = artikli
+
 
 class Uporabnik:
     def __init__(self, u_ime, u_geslo, ime=None):
@@ -58,28 +67,26 @@ class Uporabnik:
     def prijava(self):
         datoteka = 'uporabniki/' + self.u_ime + '.json'
         if os.path.isfile(datoteka) == False:
-            napaka = 'Prijava ni uspela.'
+            napaka = 'Uporabnik ne obstaja. Prijava ni uspela.'
             return False
         else:
             if self.preveri_geslo() == True:
                 return True
             else:
-                napaka = 'Prijava ni uspela.'
-                return False
-                
-
-#        with open(datoteka, 'r', encoding='UTF-8') as dat:
-#            s = b64decode(json.loads(dat.read())['u_geslo']['geslo']['sol'])
-#            z_geslo = hashlib.pbkdf2_hmac('sha256', self.u_geslo.encode('UTF-8'), s, 100000)
-#            if z_geslo == json.loads(dat.read())['u_geslo']['geslo']['kljuc']:
-#                return True
-#            else:
-#                return False
+                napaka = 'Vnesli ste napačno geslo. Prijava ni uspela.'
+                return False                
 
     def preveri_geslo(self):
         datoteka = 'uporabniki/' + self.u_ime + '.json'
         with open(datoteka, 'r', encoding='UTF-8') as dat:
-
+            slovar = json.load(dat)
+        sol = slovar['u_geslo']['geslo']['sol']
+        s = b64decode(sol.encode('UTF-8'))
+        z_geslo = hashlib.pbkdf2_hmac('sha256', self.u_geslo.encode('UTF-8'), s, 100000)
+        if b64encode(z_geslo).decode('UTF-8') == slovar['u_geslo']['geslo']['kljuc']:
+            return True
+        else:
+            return False
 
 class Administrator(Uporabnik):
     pass

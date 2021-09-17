@@ -1,16 +1,28 @@
 <div>
-  <h1>Zelenjavica</h1>
-  <p>Izberite is uporabniško ime in geslo</p>
+  <h1>REGISTRACIJA</h1>
+  <p>Izberite is uporabniško ime in geslo. Geslo naj bo dolgo vsaj šest znakov.</p>
   <form action='/registracija' method='post'>
     <div class='inputBox'>
-      <label>Uporabniško ime</label><br>
+      <label for='ID1'>Uporabniško ime</label><br>
       <input type='text' name='u_ime' id='ID1'>
     </div>
     <div class="inputBox">
-      <label>Geslo</label><br>
-      <input type='password' name='u_geslo' id='ID2'>
+      <label for='ID2'>Geslo</label><br>
+      <input type='password' name='u_geslo' id='ID2'><br>
+      <label for='ID3'>Ponovno vpišite geslo</label><br>
+      <input type='password' name='p_geslo' id='ID3'>
     </div>
     <br>
-    <input type="submit" value="Potrdi">
+    <input type="submit" value="Potrdi"> 
   </form>
 </div>
+% if 'u_ime' in napake:
+<div style="color: red;">
+  <strong>{{ napake["u_ime"] }}</strong>
+</div>
+%end
+% if "geslo" in napake:
+<div style="color: red;">
+  <strong>{{ napake["geslo"] }}</strong>
+</div>
+% end
