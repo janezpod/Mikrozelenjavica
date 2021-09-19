@@ -40,6 +40,29 @@
     <li style='float:right'><a href='/odjava'>Odjava</a></li>
 </ul>
     
-<div style='padding:20px;margin-top:30px;height:1500px;'>
-    <h2>Dobrodšel {{u_ime}}!</h2>
+<div style='padding: 20px; margin-top: 30px; height: 1500px'>
+  %if korak == 'priprava naročila' or not naroceno:
+  <h1> Vnesite število zelenjavic </h1>
+  <form action='/narocilo/' method='post'>      
+      <table>
+          <tr>
+              <!-- <th>ZŠ</th> -->
+              <th>Mikrozelenjava</th>
+              <th>Cena v EUR</th>
+              <th>Naročam število</th>
+          </tr>
+              %for zelenjava in zelenjavice:
+              %ime = str(zelenjava['zaporedno_stevilo'])
+          <tr>
+              <td>{{zelenjava['vrsta']}}</td>
+              <td>{{zelenjava['cena']}}</td>
+              <td> <input type='number' name={{ime}} placeholder = '0'></td>
+          </tr>
+          % end
+      </table>
+      <br>
+      <!-- <input type="submit" value="Pošlji naročilo"> -->    
+      <button type='submit' disabled style="display: none" aria-hidden="true"></button>
+      <button type="submit">Pošljite naročilo</button>    
+  </form> 
 </div>

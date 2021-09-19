@@ -4,6 +4,7 @@ from datetime import date
 from model import Stanje, Narocilo, Uporabnik, zakrij_geslo
 
 SIFRA = os.urandom(4)
+stanje = Stanje()
 
 @bottle.get('/')
 def osnovna_zaslon():
@@ -51,7 +52,7 @@ def prijava_post():
         bottle.response.set_cookie('uporabnisko_ime', u_ime, path='/', secret=SIFRA)
         bottle.redirect('/')
     else:
-        bottle.redirect('/prijava.html')
+        bottle.redirect('/prijava')
 
 @bottle.get('/odjava')
 def odjava_get():
@@ -61,7 +62,11 @@ def odjava_get():
 @bottle.get('/novo_narocilo')
 def novo_narocilo_get():
     u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
-    return bottle.template('novo_narocilo.html', u_ime=u_ime)
+    if not u_ime:
+        bottle.redirect('/')
+    else:
+        zelenjavice = stanje.zelenjavica
+        return bottle.template('novo_narocilo.html', u_ime=u_ime, zelenjavice=zelenjavice, naroceno=[], korak ='priprava naročila')
 
 @bottle.get('/spremeni_podatke')
 def spremeni_podatke_get():

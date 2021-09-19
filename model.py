@@ -19,12 +19,15 @@ class Stanje:
         self.administratorji = []
         self.narocila = []
         self.zelenjavica = [
-            {'zaporedno_stevilo': 1, 'vrsta': 'Test', 'cena': 3.5, 'faza': [3,4]}
+            {'zaporedno_stevilo': 1, 'vrsta': 'Test', 'cena': 3.5, 'faza': [3,4], 'aktivna': 1}
         ]
     
     def ustvari_zelenjavico(self, vrsta, cena, faza):
-        nova_zelenjavica = {'zaporedno_stevilo': len(Stanje.zelenjavica) + 1, 'vrsta': vrsta, 'cena': cena, 'faza': faza}
+        nova_zelenjavica = {'zaporedno_stevilo': len(Stanje.zelenjavica) + 1, 'vrsta': vrsta, 'cena': cena, 'faza': faza, 'aktivna': 0}
         return Stanje.zelenjavica.append(nova_zelenjavica)
+
+    def aktiviraj_zelenjavico(self, zaporedno_stevilo):
+        pass
 
     def ustvari_narocilo(self, narocilo):
         pass
@@ -60,7 +63,7 @@ class Uporabnik:
 
     def shrani_v_datoteko(self):
         datoteka = 'uporabniki/' + self.u_ime + '.json'
-        with open(datoteka, 'w+', encoding='UTF-8') as dat:
+        with open(datoteka, 'w', encoding='UTF-8') as dat:
             slovar = self.v_slovar()
             json.dump(slovar, dat, ensure_ascii=False, indent=4)
     
