@@ -35,7 +35,7 @@
 <ul>
     <li><a href='/'>Moja naročila</a></li>
     <li><a class='active' href='/novo_narocilo'>Novo naročilo</a></li>
-    <li><a href='#contact'>Spremeni podatke</a></li>
+    <li><a href='/spremeni_podatke'>Zamenjaj geslo</a></li>
     <li><a href='#about'>About</a></li>
     <li style='float:right'><a href='/odjava'>Odjava</a></li>
 </ul>
@@ -46,7 +46,6 @@
   <form action='/narocilo/' method='post'>      
       <table>
           <tr>
-              <!-- <th>ZŠ</th> -->
               <th>Mikrozelenjava</th>
               <th>Cena v EUR</th>
               <th>Naročam število</th>
@@ -61,8 +60,7 @@
           % end
       </table>
       <br>
-      <!-- <input type="submit" value="Pošlji naročilo"> -->    
-      <button type='submit' disabled style="display: none" aria-hidden="true"></button>
-      <button type="submit">Pošljite naročilo</button>    
+      <button type='submit' disabled style='display: none' aria-hidden='true'></button>
+      <button type='submit'>Pošljite naročilo</button>    
   </form> 
 </div>

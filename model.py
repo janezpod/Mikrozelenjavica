@@ -1,7 +1,7 @@
 import os
 import json
 import hashlib
-from base64 import b64encode, b64decode
+from base64 import b64encode, b64decode, encode
 
 
 
@@ -66,6 +66,11 @@ class Uporabnik:
         with open(datoteka, 'w', encoding='UTF-8') as dat:
             slovar = self.v_slovar()
             json.dump(slovar, dat, ensure_ascii=False, indent=4)
+    
+    def spremeni_geslo(self, n_geslo):
+        datoteka = 'uporabniki/' + self.u_ime + '.json'
+        os.remove(datoteka)
+        return Uporabnik(self.u_ime, n_geslo).shrani_v_datoteko()
     
     def prijava(self):
         datoteka = 'uporabniki/' + self.u_ime + '.json'

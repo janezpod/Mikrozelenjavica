@@ -35,11 +35,30 @@
 <ul>
     <li><a href='/'>Moja naročila</a></li>
     <li><a href='/novo_narocilo'>Novo naročilo</a></li>
-    <li><a class='active' href='/spremeni_podatke'>Spremeni podatke</a></li>
+    <li><a class='active' href='/spremeni_podatke'>Zamenjaj geslo</a></li>
     <li><a href='#about'>About</a></li>
     <li style='float:right'><a href='/odjava'>Odjava</a></li>
 </ul>
     
 <div style='padding:20px;margin-top:30px;height:1500px;'>
-    <h2>Dobrodšel {{u_ime}}!</h2>
+  <h2>Vnesite podatke:</h2>
+  <form action='/spremeni_podatke' method='post'>
+    <div>
+      <label>Trenutno geslo</label><br>
+      <input type='password' name='s_geslo' id='ID1' placeholder=''>
+    </div>
+      <label>Novo geslo</label><br>
+      <input type='password' name='n_geslo' id='ID2' placeholder=''>
+    <div>
+      <label>Potrdi novo geslo</label><br>
+      <input type='password' name='p_geslo' id='ID3' placeholder=''>
+    </div>
+    <br>
+    <input type="submit" value="Prijava">
+  </form>
+% if 'geslo' in napake:
+<div style="color: red;">
+  <strong>{{ napake['geslo'] }}</strong>
+</div>
+% end
 </div>

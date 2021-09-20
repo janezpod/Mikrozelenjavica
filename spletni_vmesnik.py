@@ -70,8 +70,35 @@ def novo_narocilo_get():
 
 @bottle.get('/spremeni_podatke')
 def spremeni_podatke_get():
+    napake = []
     u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
-    return bottle.template('spremeni_podatke.html', u_ime=u_ime)
+    if not u_ime:
+        bottle.redirect('/')
+    else:
+        return bottle.template('spremeni_podatke.html', u_ime=u_ime, napake=napake)
+
+@bottle.post('/spremeni_podatke')
+def spremeni_podatke_post():
+    u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
+    if not u_ime:
+        bottle.redirect('/')
+    else:
+        s_geslo = bottle.request.forms.getunicode('s_geslo')
+        n_geslo = bottle.request.forms.getunicode('n_geslo')
+        p_geslo = bottle.request.forms.getunicode('p_geslo')
+        if n_geslo != p_geslo or Uporabnik(u_ime, s_geslo).preveri_geslo() == False:
+            napake = {'geslo': 'Poizkusite znova.'}
+            return bottle.template('spremeni_podatke.html', napake=napake)
+        elif len(n_geslo) < 6:
+            napake = {'geslo': 'Novo geslo naj bo dolgo vsaj šest znakov.'}
+            return bottle.template('spremeni_podatke.html', napake=napake)
+        else:
+            z_geslo = zakrij_geslo(n_geslo)
+            Uporabnik(u_ime, s_geslo).spremeni_geslo(z_geslo)
+            napake = {'geslo': 'Ušpesno ste spremenili geslo.'}
+            return bottle.template('spremeni_podatke.html', napake=napake)
+
+
 
 
 bottle.run(debug=True, reloader=True)
