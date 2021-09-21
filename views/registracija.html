@@ -1,28 +1,65 @@
-<div>
-  <h1>REGISTRACIJA</h1>
-  <p>Izberite is uporabniško ime in geslo. Geslo naj bo dolgo vsaj šest znakov.</p>
-  <form action='/registracija' method='post'>
-    <div class='inputBox'>
-      <label for='ID1'>Uporabniško ime</label><br>
-      <input type='text' name='u_ime' id='ID1'>
+<head>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+      background-color: #83d377;
+    }
+
+    .active {
+      background-color: #83d377;
+    }
+  </style>
+</head>
+
+<body>
+  <ul>
+    <li><a href='/'>ZELENJAVICA</a></li>
+    <li><a href='/ponudba'>Ponudba</a></li>
+    <li style='float:right'><a class='active' href='/prijava'>Prijava</a></li>
+  </ul>
+  <div style='padding:20px;margin-top:30px;height:1500px;'>
+    <h2>Vnesite podatke za registacijo</h2>
+    <p>Izberite is uporabniško ime in geslo, ki naj bo dolgo vsaj šest znakov.</p>
+    <form action='/registracija' method='post'>
+      <input type='text' name='u_ime' id='ID1' , placeholder='Uporabniško ime'><br>
+      <input type='password' name='u_geslo' id='ID2' , placeholder='Geslo'><br>
+      <input type='password' name='p_geslo' id='ID3' , placeholder='Ponovno vpišite geslo'><br>
+      <br>
+      <input type="submit" value="Potrdi">
+    </form>
+    % if 'u_ime' in napake:
+    <div style="color: red;">
+      <strong>{{ napake["u_ime"] }}</strong>
     </div>
-    <div class="inputBox">
-      <label for='ID2'>Geslo</label><br>
-      <input type='password' name='u_geslo' id='ID2'><br>
-      <label for='ID3'>Ponovno vpišite geslo</label><br>
-      <input type='password' name='p_geslo' id='ID3'>
+    % elif "geslo" in napake:
+    <div style="color: red;">
+      <strong>{{ napake["geslo"] }}</strong>
     </div>
-    <br>
-    <input type="submit" value="Potrdi"> 
-  </form>
-</div>
-% if 'u_ime' in napake:
-<div style="color: red;">
-  <strong>{{ napake["u_ime"] }}</strong>
-</div>
-%end
-% if "geslo" in napake:
-<div style="color: red;">
-  <strong>{{ napake["geslo"] }}</strong>
-</div>
-% end
+    % end
+</body>

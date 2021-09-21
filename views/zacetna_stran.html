@@ -1,18 +1,47 @@
-<div>
-    <h1>Zelenjavica</h1>
-    </center>
-    <p>Spletna stran za naročila mikro zelenjave. <a href='https://zelenjavica.si/'' target=' _blank'>Več o mikro zelenjavi</a>.</p>
-    <br>
-</div>
+<style>
+    body {
+        margin: 0;
+    }
 
-<form action='/registracija'>
-    <button style='width: 250px; height: 40px; font-size: 25px; margin: 5px; margin-left: 35px;' type='submit'>
-        Registracija
-    </button>
-    <br>
-</form>
-<form action='/prijava'>
-    <button style='width: 250px; height: 40px; font-size: 25px; margin: 5px; margin-left: 35px;' type='submit'>
-        Prijava
-    </button>
-</form>
+    ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        width: 100%;
+    }
+
+    li {
+        float: left;
+    }
+
+    li a {
+        display: block;
+        color: white;
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+        background-color: #83d377;
+    }
+
+    .active {
+        background-color: #83d377;
+    }
+</style>
+
+<body>
+    <ul>
+        <li><a class='active' href='/'>ZELENJAVICA</a></li>
+        <li><a href='/ponudba'>Ponudba</a></li>
+        <li style='float:right'><a href='/prijava'>Prijava</a></li> 
+    </ul>
+    <div style='padding:20px;margin-top:30px;height:1500px;'>
+        <h2>Dobrodšel!</h2>
+    </div>
+</body>

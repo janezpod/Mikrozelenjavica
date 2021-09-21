@@ -1,0 +1,60 @@
+<head>
+  <style>
+    body {
+      margin: 0;
+      padding-top: 50px;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+      background-color: #83d377;
+    }
+
+    .active {
+      background-color: #83d377;
+    }
+  </style>
+</head>
+
+<body>
+  % if u_ime:
+  <ul>
+    <li><a href='/'>Moja naročila</a></li>
+    <li><a href='/novo_narocilo'>Novo naročilo</a></li>
+    <li><a class='active' href='/ponudba'>Ponudba</a></li>
+    <li><a href='/spremeni_podatke'>Zamenjaj geslo</a></li>
+    <li style='float:right'><a href='/odjava'>Odjava</a></li>
+  </ul>
+  % else:
+  <ul>
+    <li><a href='/'>ZELENJAVICA</a></li>
+    <li><a class='active' href='/ponudba'>Ponudba</a></li>
+    <li style='float:right'><a href='/prijava'>Prijava</a></li>
+  </ul>
+  % end
+  <div style='padding:20px;margin-top:30px;height:1500px;'>
+    <center><img src='images/{{picture}}' alt='Ponudba' width="750" height="1050"></center>
+  </div>
+</body>
