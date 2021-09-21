@@ -42,22 +42,20 @@ def registracija_post():
 
 @bottle.get('/prijava')
 def prijava_get():
-    return bottle.template('prijava.html')
+    napake = []
+    return bottle.template('prijava.html', napake = napake)
 
 @bottle.post('/prijava')
 def prijava_post():
+    napake = []
     u_ime = bottle.request.forms.getunicode('u_ime').lower()
     u_geslo = bottle.request.forms.getunicode('u_geslo')
     if Uporabnik(u_ime, u_geslo).prijava() == True:
         bottle.response.set_cookie('uporabnisko_ime', u_ime, path='/', secret=SIFRA)
         bottle.redirect('/')
     else:
-        bottle.redirect('/prijava')
-
-@bottle.get('/odjava')
-def odjava_get():
-    bottle.response.delete_cookie('uporabnisko_ime', path='/', secret=SIFRA)
-    bottle.redirect('/')
+        napake = {'geslo': 'Prijava ni uspela. Poizkusite znova.'}
+        return bottle.template('prijava.html', napake = napake)
 
 @bottle.get('/novo_narocilo')
 def novo_narocilo_get():
@@ -98,6 +96,20 @@ def spremeni_podatke_post():
             napake = {'geslo': 'Ušpesno ste spremenili geslo.'}
             return bottle.template('spremeni_podatke.html', napake=napake)
 
+@bottle.get('/ponudba')
+def ponudba_get():
+    u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
+    slika = 'B_V3.jpg'
+    return bottle.template('ponudba.html', u_ime=u_ime, picture=slika)
+
+@bottle.get("/images/<picture>")
+def images(picture):
+    return bottle.static_file(picture, "images")
+
+@bottle.get('/odjava')
+def odjava_get():
+    bottle.response.delete_cookie('uporabnisko_ime', path='/', secret=SIFRA)
+    bottle.redirect('/')
 
 
 

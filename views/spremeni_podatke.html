@@ -1,64 +1,62 @@
 <style>
-    body {margin:0;}
-    
-    ul {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      background-color: #333;
-      position: fixed;
-      top: 0;
-      width: 100%;
-    }
-    
-    li {
-      float: left;
-    }
-    
-    li a {
-      display: block;
-      color: white;
-      text-align: center;
-      padding: 14px 16px;
-      text-decoration: none;
-    }
-    
-    li a:hover:not(.active) {
-      background-color: #111;
-    }
-    
-    .active {
-      background-color: #04AA6D;
-    }
+  body {
+    margin: 0;
+  }
+
+  ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }
+
+  li {
+    float: left;
+  }
+
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+
+  li a:hover:not(.active) {
+    background-color: #84cc79;
+  }
+
+  .active {
+    background-color: #83d377;
+  }
 </style>
-<ul>
+
+<body>
+  <ul>
     <li><a href='/'>Moja naročila</a></li>
     <li><a href='/novo_narocilo'>Novo naročilo</a></li>
+    <li><a href='/ponudba'>Ponudba</a></li>
     <li><a class='active' href='/spremeni_podatke'>Zamenjaj geslo</a></li>
-    <li><a href='#about'>About</a></li>
     <li style='float:right'><a href='/odjava'>Odjava</a></li>
-</ul>
-    
-<div style='padding:20px;margin-top:30px;height:1500px;'>
-  <h2>Vnesite podatke:</h2>
-  <form action='/spremeni_podatke' method='post'>
-    <div>
-      <label>Trenutno geslo</label><br>
-      <input type='password' name='s_geslo' id='ID1' placeholder=''>
+  </ul>
+
+  <div style='padding:20px;margin-top:30px;height:1500px;'>
+    <h2>Vnesite podatke:</h2>
+    <form action='/spremeni_podatke' method='post'>
+      <input type='password' name='s_geslo' id='ID1' placeholder='Trenutno geslo'><br>
+      <input type='password' name='n_geslo' id='ID2' placeholder='Novo geslo'><br>
+      <input type='password' name='p_geslo' id='ID3' placeholder='Potrdi novo geslo'><br>
+      <br>
+      <input type="submit" value="Prijava">
+    </form>
+    % if 'geslo' in napake:
+    <div style="color: red;">
+      <strong>{{ napake['geslo'] }}</strong>
     </div>
-      <label>Novo geslo</label><br>
-      <input type='password' name='n_geslo' id='ID2' placeholder=''>
-    <div>
-      <label>Potrdi novo geslo</label><br>
-      <input type='password' name='p_geslo' id='ID3' placeholder=''>
-    </div>
-    <br>
-    <input type="submit" value="Prijava">
-  </form>
-% if 'geslo' in napake:
-<div style="color: red;">
-  <strong>{{ napake['geslo'] }}</strong>
-</div>
-% end
-</div>
+    % end
+  </div>
+</body>

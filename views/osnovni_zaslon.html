@@ -1,6 +1,9 @@
-<style>
-    body {margin:0;}
-    
+<head>
+  <style>
+    body {
+      margin: 0;
+    }
+
     ul {
       list-style-type: none;
       margin: 0;
@@ -11,11 +14,11 @@
       top: 0;
       width: 100%;
     }
-    
+
     li {
       float: left;
     }
-    
+
     li a {
       display: block;
       color: white;
@@ -23,23 +26,26 @@
       padding: 14px 16px;
       text-decoration: none;
     }
-    
+
     li a:hover:not(.active) {
-      background-color: #111;
+      background-color: #84cc79;
     }
-    
+
     .active {
-      background-color: #04AA6D;
+      background-color: #84cc79;
     }
-</style>
-<ul>
+  </style>
+</head>
+
+<body>
+  <ul>
     <li><a class='active' href='/'>Moja naročila</a></li>
     <li><a href='/novo_narocilo'>Novo naročilo</a></li>
+    <li><a href='/ponudba'>Ponudba</a></li>
     <li><a href='/spremeni_podatke'>Zamenjaj geslo</a></li>
-    <li><a href='#about'>About</a></li>
     <li style='float:right'><a href='/odjava'>Odjava</a></li>
-</ul>
-    
-<div style='padding:20px;margin-top:30px;height:1500px;'>
+  </ul>
+  <div style='padding:20px;margin-top:30px;height:1500px;'>
     <h2>Dobrodšel {{u_ime}}!</h2>
-</div>
+  </div>
+</body>
