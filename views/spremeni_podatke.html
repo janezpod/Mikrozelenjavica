@@ -53,9 +53,12 @@
       <br>
       <input type="submit" value="Prijava">
     </form>
-    % if 'geslo' in napake:
+    % if 'geslo' in sporocila:
     <div style="color: red;">
-      <strong>{{ napake['geslo'] }}</strong>
+      <strong>{{ sporocila['geslo'] }}</strong>
+    % elif 'uspesno' in sporocila:
+    <div style="color: #83d377;">
+      <strong>{{ sporocila['uspesno'] }}</strong>
     </div>
     % end
   </div>
