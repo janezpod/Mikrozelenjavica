@@ -53,13 +53,13 @@
       <br>
       <input type="submit" value="Potrdi">
     </form>
-    % if 'u_ime' in napake:
+    % if 'u_ime' in sporocila:
     <div style="color: red;">
-      <strong>{{ napake["u_ime"] }}</strong>
+      <strong>{{ sporocila["u_ime"] }}</strong>
     </div>
-    % elif "geslo" in napake:
+    % elif "geslo" in sporocila:
     <div style="color: red;">
-      <strong>{{ napake["geslo"] }}</strong>
+      <strong>{{ sporocila["geslo"] }}</strong>
     </div>
     % end
 </body>

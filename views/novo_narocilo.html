@@ -1,39 +1,49 @@
-<style>
-  body {
-    margin: 0;
-  }
+<head>
+  <style>
+    body {
+      margin: 0;
+    }
 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
 
-  li {
-    float: left;
-  }
+    li {
+      float: left;
+    }
 
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
 
-  li a:hover:not(.active) {
-    background-color: #84cc79;
-  }
+    li a:hover:not(.active) {
+      background-color: #84cc79;
+    }
 
-  .active {
-    background-color: #83d377;
-  }
-</style>
+    .active {
+      background-color: #84cc79;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 15px;
+    }
+  </style>
+</head>
 
 <body>
   <ul>
@@ -44,26 +54,69 @@
     <li style='float:right'><a href='/odjava'>Odjava</a></li>
   </ul>
   <div style='padding: 20px; margin-top: 30px; height: 1500px'>
-    %if korak == 'priprava naročila' or not naroceno:
+
+    %if korak == 'priprava narocila' or not naroceno:
+
     <h2> Vnesite število zelenjavic </h2>
-    <form action='/narocilo/' method='post'>
+    <form action='/novo_narocilo' method='post'>
+      <input style="display: none;" type='text' name='korak' value='potrditev narocila'>
       <table>
-        <tr>
+        <tr style='background-color:honeydew;'>
           <th>Mikrozelenjava</th>
           <th>Cena v EUR</th>
           <th>Naročam število</th>
         </tr>
         %for zelenjava in zelenjavice:
-        %ime = str(zelenjava['zaporedno_stevilo'])
+          %zaporedno_stevilo = str(zelenjava['zaporedno_stevilo'])
         <tr>
           <td>{{zelenjava['vrsta']}}</td>
           <td>{{zelenjava['cena']}}</td>
-          <td> <input type='number' name={{ime}} placeholder='0'></td>
+          <td> <input type='number' name={{zaporedno_stevilo}} min=0 max=100 value='0'></td>
         </tr>
         % end
       </table><br>
-      <button type='submit' disabled style='display: none' aria-hidden='true'></button>
-      <button type='submit'>Pošljite naročilo</button>
-    </form>
+      <button type="submit" disabled style="display: none" aria-hidden="true"></button>
+      <button type="submit">Pošljite naročilo</button>
+
+      % elif korak == 'potrditev narocila':
+
+      <h1>Preverite in potrdite naročilo </h1>
+      <form action='/novo_narocilo' method='post'>
+        <input style="display: none;" type='text' name='korak' value="shrani narocilo">
+        <table>
+          <tr style="background-color:honeydew;">
+            <th>Mikrozelenjava</th>
+            <th>Cena v EUR</th>
+            <th>Število</th>
+            <th>Znesek v EUR</th>
+          </tr>
+          %znesek_skupaj = 0
+          %for narocilo in naroceno:
+            %zaporedno_stevilo = int(narocilo['zaporedno_stevilo'])
+            %stevilo_narocenih = int(narocilo['stevilo'])
+            %znesek = zelenjavice[zaporedno_stevilo]['cena'] * stevilo_narocenih
+            %znesek_skupaj += znesek
+            <input hidden type='number' name={{zaporedno_stevilo}} value={{stevilo_narocenih}}>
+              %if stevilo_narocenih:
+              <tr>
+                <td>{{zelenjavice[zaporedno_stevilo]['vrsta']}}</td>
+                <td>{{zelenjavice[zaporedno_stevilo]['cena']}}</td>
+                <td>{{stevilo_narocenih}}</td>
+                <td>{{znesek}} </td>
+            </tr>
+            % end
+          % end
+
+          <tr style="border-top: double;">
+            <td colspan="3">Znesek skupaj v EUR:</td>
+            <td>{{znesek_skupaj}} </td>
+          </tr>
+        </table><br>
+        <p>Vpišite vaše posebne želje ter naslov dostave in vašo telefonsko številko, na katero ste dosegljivi:</p>
+        <textarea style="font-size:1.5em;" name="sporocilo" rows="5" cols="35" lang="si">Naslov dostave:&#013;&#010;&#013;&#010;Telefonska številka:</textarea><br>
+        <button type='submit' disabled style='display: none' aria-hidden='true'></button>
+        <br>
+        <input type="submit" value="Potrjujem naročilo">
+      </form>
   </div>
 </body>
