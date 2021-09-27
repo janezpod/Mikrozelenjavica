@@ -49,11 +49,11 @@
       <input type='text' name='u_ime' id='ID1' placeholder='Uporbniško ime'><br>
       <input type='password' name='u_geslo' id='ID2' placeholder='Geslo'><br>
       <br>
-      <input type="submit" value="Prijava">
+      <input type='submit' value='Prijava'>
     </form>
-    % if "geslo" in sporocila:
-    <div style="color: red;">
-      <strong>{{ sporocila["geslo"] }}</strong><br>
+    % if 'geslo' in sporocila:
+    <div style='color: red;'>
+      <strong>{{ sporocila['geslo'] }}</strong><br>
       <br>
     </div>
     % end

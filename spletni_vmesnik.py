@@ -8,15 +8,16 @@ SIFRA = os.urandom(4)
 @bottle.get('/')
 def osnovna_zaslon():
     u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
-    if u_ime:
-        return bottle.template('osnovni_zaslon.html', u_ime=u_ime)
+    if u_ime: 
+        narocila = Uporabnik(u_ime).zberi_narocila()
+        return bottle.template('osnovni_zaslon.html', u_ime=u_ime, narocila=narocila)
     else:
         return bottle.template('zacetna_stran.html')
 
 @bottle.get('/registracija')
 def registracija_get():
     sporocila = []
-    return bottle.template("registracija.html", sporocila=sporocila, polja={"uporabnisko_ime": None}, u_ime='')
+    return bottle.template('registracija.html', sporocila=sporocila, polja={'uporabnisko_ime': None}, u_ime='')
 
 @bottle.post('/registracija')
 def registracija_post():
@@ -37,7 +38,7 @@ def registracija_post():
         z_geslo = zakrij_geslo(u_geslo)
         Uporabnik(u_ime, z_geslo).shrani_v_datoteko()
         bottle.response.set_cookie('uporabnisko_ime', u_ime, path='/', secret=SIFRA)
-        bottle.redirect("/")
+        bottle.redirect('/')
 
 @bottle.get('/prijava')
 def prijava_get():
@@ -49,7 +50,7 @@ def prijava_post():
     sporocila = []
     u_ime = bottle.request.forms.getunicode('u_ime').lower()
     u_geslo = bottle.request.forms.getunicode('u_geslo')
-    if Uporabnik(u_ime, u_geslo).prijava() == True:
+    if Uporabnik(u_ime, u_geslo).prijava():
         bottle.response.set_cookie('uporabnisko_ime', u_ime, path='/', secret=SIFRA)
         bottle.redirect('/')
     else:
@@ -67,7 +68,7 @@ def novo_narocilo_get():
 
 @bottle.post('/novo_narocilo')
 def narocilo_post():
-    u_ime = bottle.request.get_cookie("uporabnisko_ime", secret=SIFRA)
+    u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
     if not u_ime:
         bottle.redirect('/')
     else:
@@ -83,7 +84,7 @@ def narocilo_post():
             zelenjavica_narocena['zaporedno_stevilo'] = zaporedno_s
             zelenjavica_narocena['vrsta'] = zelenjava['vrsta']
             zelenjavica_narocena['cena'] = zelenjava['cena']
-            zelenjavica_narocena["stevilo"] = stevilo_narocenih
+            zelenjavica_narocena['stevilo'] = stevilo_narocenih
             zelenjavice_narocene.append(zelenjavica_narocena)
         if not potrdi:
             bottle.redirect('/novo_narocilo')
@@ -135,9 +136,9 @@ def ponudba_get():
     slika = 'B_V3.jpg'
     return bottle.template('ponudba.html', u_ime=u_ime, picture=slika)
 
-@bottle.get("/images/<picture>")
+@bottle.get('/images/<picture>')
 def images(picture):
-    return bottle.static_file(picture, "images")
+    return bottle.static_file(picture, 'images')
 
 @bottle.get('/odjava')
 def odjava_get():

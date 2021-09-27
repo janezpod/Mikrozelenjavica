@@ -51,13 +51,13 @@
       <input type='password' name='n_geslo' id='ID2' placeholder='Novo geslo'><br>
       <input type='password' name='p_geslo' id='ID3' placeholder='Potrdi novo geslo'><br>
       <br>
-      <input type="submit" value="Prijava">
+      <input type='submit' value='Prijava'>
     </form>
     % if 'geslo' in sporocila:
-    <div style="color: red;">
+    <div style='color: red;'>
       <strong>{{ sporocila['geslo'] }}</strong>
     % elif 'uspesno' in sporocila:
-    <div style="color: #83d377;">
+    <div style='color: #83d377;'>
       <strong>{{ sporocila['uspesno'] }}</strong>
     </div>
     % end

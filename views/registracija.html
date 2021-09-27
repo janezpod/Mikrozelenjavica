@@ -51,15 +51,15 @@
       <input type='password' name='u_geslo' id='ID2' , placeholder='Geslo'><br>
       <input type='password' name='p_geslo' id='ID3' , placeholder='Ponovno vpišite geslo'><br>
       <br>
-      <input type="submit" value="Potrdi">
+      <input type='submit' value='Potrdi'>
     </form>
     % if 'u_ime' in sporocila:
-    <div style="color: red;">
-      <strong>{{ sporocila["u_ime"] }}</strong>
+    <div style='color: red;'>
+      <strong>{{ sporocila['u_ime'] }}</strong>
     </div>
-    % elif "geslo" in sporocila:
-    <div style="color: red;">
-      <strong>{{ sporocila["geslo"] }}</strong>
+    % elif 'geslo' in sporocila:
+    <div style='color: red;'>
+      <strong>{{ sporocila['geslo'] }}</strong>
     </div>
     % end
 </body>

@@ -46,6 +46,28 @@
     <li style='float:right'><a href='/odjava'>Odjava</a></li>
   </ul>
   <div style='padding:20px;margin-top:30px;height:1500px;'>
-    <h2>Dobrodšel {{u_ime}}!</h2>
+    <h1>Vaša naročila</h1>
+    % if not len(narocila):
+    <p>Nimate naročil.</p>
+    % else:
+    <ol>
+      % for narocilo in narocila:
+      <li>
+      <h3>datum naročila {{narocilo.datum_narocila}}</h3>
+      </li><br><br><br>
+      % cena_skupaj = 0
+      % for naroceno in narocilo.naroceno:
+      % vrsta = naroceno['vrsta']
+      % stevilo = naroceno['stevilo']
+      % cena = naroceno['cena']
+      % strosek = stevilo * cena
+      % cena_skupaj+=strosek
+      <p>{{vrsta}}, Cena na kos: {{cena}}EUR, Količina: {{stevilo}}, Cena: {{strosek}}EUR</p>
+      % end
+      <p>Cena skupaj: {{cena_skupaj}}</p>
+      <p>Sporočilo: {{narocilo.sporocilo}}</p>
+      % end
+    </ol>
+    %end
   </div>
 </body>
