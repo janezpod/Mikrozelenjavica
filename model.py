@@ -43,7 +43,7 @@ class Stanje:
 stanje = Stanje()
 
 class Narocilo:
-    def __init__(self, narocnik, narocil='', stevilka=1, naroceno=[], stanje='', sporocilo='', datum_narocila=datetime.now()):
+    def __init__(self, narocnik, narocil='', stevilka=1, naroceno=[], stanje='', sporocilo='', datum_narocila=''):
         self.narocnik = narocnik
         self.stevilka = stevilka
         if narocil:
@@ -56,7 +56,7 @@ class Narocilo:
         self.datum_narocila = datum_narocila
 
     def v_slovar(self):
-        datum_narocila = self.datum_narocila.isoformat()
+        datum_narocila = self.datum_narocila.strftime('%Y-%m-%d %H:%M')
         return {
             'stevilka narocila': self.stevilka,
             'narocnik': self.narocnik,
@@ -95,7 +95,8 @@ class Narocilo:
                                 'cena': x['cena'],
                                 'stevilo': x['stevilo']}
                                 for x in zapis['naroceno']]
-            narocilo.sporocilo = zapis['sporocilo']            
+            narocilo.sporocilo = zapis['sporocilo']      
+            narocilo.datum_narocila = zapis['datum narocila'] 
             narocila.append(narocilo)
         return narocila
 

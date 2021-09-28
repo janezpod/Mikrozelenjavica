@@ -1,6 +1,6 @@
 import os
 import bottle
-from datetime import date
+from datetime import datetime
 from model import Stanje, Narocilo, Uporabnik, zakrij_geslo, stanje
 
 SIFRA = os.urandom(4)
@@ -96,7 +96,7 @@ def narocilo_post():
                 return bottle.template('novo_narocilo.html', u_ime=u_ime, zelenjavice=zelenjavice, naroceno=zelenjavice_narocene, korak = 'potrditev narocila')
             elif korak == 'shrani narocilo':
                 sporocilo = str(bottle.request.forms.getunicode('sporocilo'))
-                narocilo = Narocilo(narocnik=u_ime, stanje='naroceno', naroceno=zelenjavice_narocene, sporocilo=sporocilo)
+                narocilo = Narocilo(narocnik=u_ime, stanje='naroceno', naroceno=zelenjavice_narocene, sporocilo=sporocilo, datum_narocila=datetime.now())
                 narocilo.shrani_v_datoteko()
                 return bottle.template('potrdi_narocilo.html', u_ime=u_ime, zelenjavice=zelenjavice, naroceno=zelenjavice_narocene, korak = 'shrani porocilo')
             else:
