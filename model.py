@@ -126,7 +126,7 @@ class Uporabnik:
             'pravice': self.pravice
         }
     
-    def pravice(self):
+    def preberi_pravice(self):
         datoteka = 'uporabniki/' + self.u_ime + '.json'
         with open(datoteka, 'r', encoding='UTF-8') as dat:
             slovar = json.load(dat)
@@ -172,8 +172,8 @@ class Uporabnik:
         narocila = []
         pravice = 'uporabnik'
         narocila = Narocilo.preberi_narocila()
-        if pravice == 'uporabnik':
+        if self.pravice == 'uporabnik':
             narocila = [narocilo for narocilo in narocila if narocilo.narocnik == self.u_ime]
             return narocila
-        elif pravice == 'admin':
+        else:
             return narocila

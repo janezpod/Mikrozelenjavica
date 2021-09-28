@@ -8,8 +8,10 @@ SIFRA = os.urandom(4)
 @bottle.get('/')
 def osnovna_zaslon():
     u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
-    if u_ime: 
-        narocila = Uporabnik(u_ime).zberi_narocila()
+    if u_ime:
+        uporabnik = Uporabnik(u_ime)
+        uporabnik.preberi_pravice()
+        narocila = uporabnik.zberi_narocila()
         return bottle.template('osnovni_zaslon.html', u_ime=u_ime, narocila=narocila)
     else:
         return bottle.template('zacetna_stran.html')
