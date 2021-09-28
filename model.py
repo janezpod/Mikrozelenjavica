@@ -32,13 +32,6 @@ class Stanje:
         {'zaporedno_stevilo': 11, 'vrsta': 'Pšenica', 'cena': 2.5, 'cas_vzgoje': 10},
         {'zaporedno_stevilo': 12, 'vrsta': 'Ohrovt', 'cena': 2.5, 'cas_vzgoje': 10}
         ]   
-    
-    def ustvari_zelenjavico(self, vrsta, cena, cas_vzgoje):
-        nova_zelenjavica = {'zaporedno_stevilo': len(stanje.zelenjavica) + 1, 'vrsta': vrsta, 'cena': cena, 'cas_vzgoje': cas_vzgoje}
-        return stanje.zelenjavica.append(nova_zelenjavica)
-
-    def aktiviraj_zelenjavico(self, zaporedno_stevilo):
-        pass
 
 stanje = Stanje()
 
@@ -141,9 +134,10 @@ class Uporabnik:
             json.dump(slovar, dat, ensure_ascii=False, indent=4)
             
     def spremeni_geslo(self, n_geslo):
+        self.preberi_pravice()
         datoteka = 'uporabniki/' + self.u_ime + '.json'
         os.remove(datoteka)
-        return Uporabnik(self.u_ime, n_geslo).shrani_v_datoteko()
+        return Uporabnik(self.u_ime, n_geslo, pravice=self.pravice).shrani_v_datoteko()
     
     def prijava(self):
         datoteka = 'uporabniki/' + self.u_ime + '.json'
