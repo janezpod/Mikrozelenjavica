@@ -34,6 +34,10 @@
     .active {
       background-color: #84cc79;
     }
+
+    p {
+      font-size: large;
+    }
   </style>
 </head>
 
@@ -48,12 +52,12 @@
   <div style='padding:20px;margin-top:30px;height:1500px;'>
     <h1>Vaša naročila</h1>
     % if not len(narocila):
-    <p>Nimate naročil.</p>
+    <p>Nimate naročil. Naročite lahko pod zavihkom Novo naročilo.</p>
     % else:
     <ol>
       % for narocilo in narocila:
       <li>
-      <h3>datum naročila: {{narocilo.datum_narocila}}, naročnik: {{narocilo.narocnik}}</h3>
+        <h3>datum naročila: {{narocilo.datum_narocila}}, naročnik: {{narocilo.narocnik}}</h3>
       </li><br><br><br>
       % cena_skupaj = 0
       % for naroceno in narocilo.naroceno:

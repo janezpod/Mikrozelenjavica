@@ -67,7 +67,7 @@
           <th>Naročam število</th>
         </tr>
         %for zelenjava in zelenjavice:
-          %zaporedno_stevilo = str(zelenjava['zaporedno_stevilo'])
+        %zaporedno_stevilo = str(zelenjava['zaporedno_stevilo'])
         <tr>
           <td>{{zelenjava['vrsta']}}</td>
           <td>{{zelenjava['cena']}}</td>
@@ -92,19 +92,19 @@
           </tr>
           %znesek_skupaj = 0
           %for narocilo in naroceno:
-            %zaporedno_stevilo = int(narocilo['zaporedno_stevilo'])
-            %stevilo_narocenih = int(narocilo['stevilo'])
-            %znesek = zelenjavice[zaporedno_stevilo]['cena'] * stevilo_narocenih
-            %znesek_skupaj += znesek
-            <input hidden type='number' name={{zaporedno_stevilo}} value={{stevilo_narocenih}}>
-              %if stevilo_narocenih:
-              <tr>
-                <td>{{zelenjavice[zaporedno_stevilo]['vrsta']}}</td>
-                <td>{{zelenjavice[zaporedno_stevilo]['cena']}}</td>
-                <td>{{stevilo_narocenih}}</td>
-                <td>{{znesek}} </td>
-            </tr>
-            % end
+          %zaporedno_stevilo = int(narocilo['zaporedno_stevilo'])
+          %stevilo_narocenih = int(narocilo['stevilo'])
+          %znesek = zelenjavice[zaporedno_stevilo]['cena'] * stevilo_narocenih
+          %znesek_skupaj += znesek
+          <input hidden type='number' name={{zaporedno_stevilo}} value={{stevilo_narocenih}}>
+          %if stevilo_narocenih:
+          <tr>
+            <td>{{zelenjavice[zaporedno_stevilo]['vrsta']}}</td>
+            <td>{{zelenjavice[zaporedno_stevilo]['cena']}}</td>
+            <td>{{stevilo_narocenih}}</td>
+            <td>{{znesek}} </td>
+          </tr>
+          % end
           % end
 
           <tr style="border-top: double;">
@@ -113,7 +113,8 @@
           </tr>
         </table><br>
         <p>Vpišite vaše posebne želje ter naslov dostave in vašo telefonsko številko, na katero ste dosegljivi:</p>
-        <textarea style="font-size:1.5em;" name="sporocilo" rows="5" cols="35" lang="si">Naslov dostave:&#013;&#010;&#013;&#010;Telefonska številka:</textarea><br>
+        <textarea style="font-size:1.5em;" name="sporocilo" rows="5" cols="35"
+          lang="si">Naslov dostave:&#013;&#010;&#013;&#010;Telefonska številka:</textarea><br>
         <button type='submit' disabled style='display: none' aria-hidden='true'></button>
         <br>
         <input type="submit" value="Potrjujem naročilo">

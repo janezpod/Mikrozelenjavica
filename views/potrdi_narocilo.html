@@ -1,58 +1,63 @@
 <head>
-    <style>
-      body {
-        margin: 0;
-      }
-  
-      ul {
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        background-color: #333;
-        position: fixed;
-        top: 0;
-        width: 100%;
-      }
-  
-      li {
-        float: left;
-      }
-  
-      li a {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
-      }
-  
-      li a:hover:not(.active) {
-        background-color: #84cc79;
-      }
-  
-      .active {
-        background-color: #84cc79;
-      }
-  
-      table,
-      th,
-      td {
-        border: 1px solid black;
-        border-collapse: collapse;
-        padding: 15px;
-      }
-    </style>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
+
+    li {
+      float: left;
+    }
+
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
+
+    li a:hover:not(.active) {
+      background-color: #84cc79;
+    }
+
+    .active {
+      background-color: #84cc79;
+    }
+
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 15px;
+    }
+
+    p {
+      font-size: large;
+    }
+  </style>
 </head>
+
 <body>
-    <ul>
-        <li><a href='/'>Moja naročila</a></li>
-        <li><a class='active' href='/novo_narocilo'>Novo naročilo</a></li>
-        <li><a href='/ponudba'>Ponudba</a></li>
-        <li><a href='/spremeni_podatke'>Zamenjaj geslo</a></li>
-        <li style='float:right'><a href='/odjava'>Odjava</a></li>
-    </ul>
-      <div style='padding: 20px; margin-top: 30px; height: 1500px'>
-        <h2>Uspešno set oddali naročilo.</h2>
-      </div>
+  <ul>
+    <li><a href='/'>Moja naročila</a></li>
+    <li><a class='active' href='/novo_narocilo'>Novo naročilo</a></li>
+    <li><a href='/ponudba'>Ponudba</a></li>
+    <li><a href='/spremeni_podatke'>Zamenjaj geslo</a></li>
+    <li style='float:right'><a href='/odjava'>Odjava</a></li>
+  </ul>
+  <div style='padding: 20px; margin-top: 30px; height: 1500px'>
+    <h2>Uspešno ste oddali naročilo. Najdete ga pod zavihkom Moja naročila.</h2>
+  </div>
 </body>

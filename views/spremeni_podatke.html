@@ -1,39 +1,45 @@
-<style>
-  body {
-    margin: 0;
-  }
+<head>
+  <style>
+    body {
+      margin: 0;
+    }
 
-  ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-    position: fixed;
-    top: 0;
-    width: 100%;
-  }
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background-color: #333;
+      position: fixed;
+      top: 0;
+      width: 100%;
+    }
 
-  li {
-    float: left;
-  }
+    li {
+      float: left;
+    }
 
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-  }
+    li a {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+    }
 
-  li a:hover:not(.active) {
-    background-color: #84cc79;
-  }
+    li a:hover:not(.active) {
+      background-color: #84cc79;
+    }
 
-  .active {
-    background-color: #83d377;
-  }
-</style>
+    .active {
+      background-color: #83d377;
+    }
+
+    p {
+      font-size: large;
+    }
+  </style>
+</head>
 
 <body>
   <ul>
@@ -56,10 +62,10 @@
     % if 'geslo' in sporocila:
     <div style='color: red;'>
       <strong>{{ sporocila['geslo'] }}</strong>
-    % elif 'uspesno' in sporocila:
-    <div style='color: #83d377;'>
-      <strong>{{ sporocila['uspesno'] }}</strong>
+      % elif 'uspesno' in sporocila:
+      <div style='color: #83d377;'>
+        <strong>{{ sporocila['uspesno'] }}</strong>
+      </div>
+      % end
     </div>
-    % end
-  </div>
 </body>
