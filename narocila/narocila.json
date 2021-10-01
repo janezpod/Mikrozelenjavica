@@ -1,0 +1,186 @@
+[
+    {
+        "stevilka narocila": 1,
+        "narocnik": "uporabnik1",
+        "narocil": "uporabnik1",
+        "stanje": "naroceno",
+        "datum narocila": "2021-09-28 12:34",
+        "naroceno": [
+            {
+                "zaporedna stevilka": "0",
+                "vrsta": "Ajda",
+                "stevilo": 2,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "2",
+                "vrsta": "Grah",
+                "stevilo": 3,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "4",
+                "vrsta": "Pesa",
+                "stevilo": 1,
+                "cena": 2.5
+            }
+        ],
+        "sporocilo": "Naslov dostave:\r\nJadranska ulica 19, 1000 Ljubljana\r\nTelefonska številka:\r\n(01) 476 6500"
+    },
+    {
+        "stevilka narocila": 2,
+        "narocnik": "uporabnik1",
+        "narocil": "uporabnik1",
+        "stanje": "naroceno",
+        "datum narocila": "2021-09-29 09:54",
+        "naroceno": [
+            {
+                "zaporedna stevilka": "0",
+                "vrsta": "Ajda",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "6",
+                "vrsta": "Redkvica",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "10",
+                "vrsta": "Kreša",
+                "stevilo": 5,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "11",
+                "vrsta": "Pšenica",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "12",
+                "vrsta": "Ohrovt",
+                "stevilo": 2,
+                "cena": 2.5
+            }
+        ],
+        "sporocilo": "Naslov dostave:\r\nJadranska ulica 19, 1000 Ljubljana\r\nTelefonska številka:\r\n(01) 476 6500"
+    },
+    {
+        "stevilka narocila": 3,
+        "narocnik": "uporabnik2",
+        "narocil": "uporabnik2",
+        "stanje": "naroceno",
+        "datum narocila": "2021-10-01 10:11",
+        "naroceno": [
+            {
+                "zaporedna stevilka": "0",
+                "vrsta": "Ajda",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "1",
+                "vrsta": "Brokoli",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "2",
+                "vrsta": "Grah",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "3",
+                "vrsta": "Rukola",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "4",
+                "vrsta": "Pesa",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "5",
+                "vrsta": "Kapucinka",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "6",
+                "vrsta": "Redkvica",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "7",
+                "vrsta": "Rdeče Zelje",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "8",
+                "vrsta": "Sončnica",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "9",
+                "vrsta": "Gorčica",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "10",
+                "vrsta": "Kreša",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "11",
+                "vrsta": "Pšenica",
+                "stevilo": 1,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "12",
+                "vrsta": "Ohrovt",
+                "stevilo": 1,
+                "cena": 2.5
+            }
+        ],
+        "sporocilo": "Naslov dostave:\r\nJadranska ulica 21, 1000 Ljubljana\r\nTelefonska številka:\r\n(01) 4766 558\r\nDostavite na delavnik med 7.30 in 15.00."
+    },
+    {
+        "stevilka narocila": 4,
+        "narocnik": "uporabnik1",
+        "narocil": "uporabnik1",
+        "stanje": "naroceno",
+        "datum narocila": "2021-10-01 20:02",
+        "naroceno": [
+            {
+                "zaporedna stevilka": "4",
+                "vrsta": "Pesa",
+                "stevilo": 10,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "6",
+                "vrsta": "Redkvica",
+                "stevilo": 5,
+                "cena": 2.5
+            },
+            {
+                "zaporedna stevilka": "8",
+                "vrsta": "Sončnica",
+                "stevilo": 5,
+                "cena": 2.5
+            }
+        ],
+        "sporocilo": "Naslov dostave:\r\nJadranska ulica 19, 1000 Ljubljana\r\nTelefonska številka:\r\n(01) 476 6500\r\n\r\nPustite na recepciji v zgradbi Fizike."
+    }
+]
