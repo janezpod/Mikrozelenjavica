@@ -1,7 +1,14 @@
+'''spletni_vmesnik.py uporablja knjižnico bottle za 
+spletno storitev in interakcijo z uporabnikom.
+'''
+
+__version__ = 0.1
+__author__ = 'Podlogar, Janez'
+
 import os
 import bottle
 from datetime import datetime
-from model import Stanje, Narocilo, Uporabnik, zakrij_geslo, stanje
+from model import Narocilo, Uporabnik, zakrij_geslo, stanje
 
 SIFRA = os.urandom(4)
 
@@ -19,7 +26,8 @@ def osnovna_zaslon():
 @bottle.get('/registracija')
 def registracija_get():
     sporocila = []
-    return bottle.template('registracija.html', sporocila=sporocila, polja={'uporabnisko_ime': None}, u_ime='')
+    return bottle.template('registracija.html', sporocila=sporocila, 
+                            polja={'uporabnisko_ime': None}, u_ime='')
 
 @bottle.post('/registracija')
 def registracija_post():

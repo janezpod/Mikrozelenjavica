@@ -1,10 +1,20 @@
+'''V model.py so implementirani razredi in vse funkcije, 
+ki se uporabljajo v spletnem vmesniku.
+'''
+
+__version__ = 0.1
+__author__ = 'Podlogar, Janez'
+
 import os
 import json
 import hashlib
-from base64 import b64encode, b64decode, encode
+from base64 import b64encode, b64decode
 from datetime import datetime
 
-def zakrij_geslo(geslo):    
+def zakrij_geslo(geslo):
+    '''Sprejme geslo in na njem izvede zgoščevalno funkcijo z 
+    naključno generirano soljo. Sol in zgoščeno geslo vrne v obliki slovarja.
+    '''  
     s = os.urandom(32)
     sol = b64encode(s).decode('UTF-8')
     k = hashlib.pbkdf2_hmac('sha256', geslo.encode('UTF-8'), s, 100000)
@@ -13,6 +23,7 @@ def zakrij_geslo(geslo):
     return z_geslo
 
 class Stanje:
+    '''Sledi stanju sistema.'''
     def __init__(self):
         self.uporavniki = []
         self.administratorji = []
@@ -121,6 +132,9 @@ class Uporabnik:
         }
     
     def preberi_pravice(self):
+        '''Uporabniku določi atribut pravice, 
+        ki ga prebere iz uporabnikove datoteke.
+        '''
         datoteka = 'uporabniki/' + self.u_ime + '.json'
         with open(datoteka, 'r', encoding='UTF-8') as dat:
             slovar = json.load(dat)
@@ -142,13 +156,11 @@ class Uporabnik:
     def prijava(self):
         datoteka = 'uporabniki/' + self.u_ime + '.json'
         if os.path.isfile(datoteka) == False:
-            napaka = 'Uporabnik ne obstaja. Prijava ni uspela.'
             return False
         else:
             if self.preveri_geslo():
                 return True
             else:
-                napaka = 'Vnesli ste napačno geslo. Prijava ni uspela.'
                 return False                
 
     def preveri_geslo(self):
@@ -164,8 +176,10 @@ class Uporabnik:
             return False
     
     def zberi_narocila(self):
+        '''Iz vseh naročil izbere le tista, ki jih je 
+        naročič uporabnik. Adminu poda vsa naročila.
+        '''
         narocila = []
-        pravice = 'uporabnik'
         narocila = Narocilo.preberi_narocila()
         if self.pravice == 'uporabnik':
             narocila = [narocilo for narocilo in narocila if narocilo.narocnik == self.u_ime]
