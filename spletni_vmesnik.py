@@ -1,4 +1,4 @@
-'''spletni_vmesnik.py uporablja knjižnico bottle za 
+'''spletni_vmesnik.py uporablja knjižnico bottle za
 spletno storitev in interakcijo z uporabnikom.
 '''
 
@@ -12,6 +12,7 @@ from model import Narocilo, Uporabnik, zakrij_geslo, stanje
 
 SIFRA = os.urandom(4)
 
+
 @bottle.get('/')
 def osnovna_zaslon():
     u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
@@ -23,11 +24,13 @@ def osnovna_zaslon():
     else:
         return bottle.template('zacetna_stran.html')
 
+
 @bottle.get('/registracija')
 def registracija_get():
     sporocila = []
-    return bottle.template('registracija.html', sporocila=sporocila, 
-                            polja={'uporabnisko_ime': None}, u_ime='')
+    return bottle.template('registracija.html', sporocila=sporocila,
+                           polja={'uporabnisko_ime': None}, u_ime='')
+
 
 @bottle.post('/registracija')
 def registracija_post():
@@ -50,10 +53,12 @@ def registracija_post():
         bottle.response.set_cookie('uporabnisko_ime', u_ime, path='/', secret=SIFRA)
         bottle.redirect('/')
 
+
 @bottle.get('/prijava')
 def prijava_get():
     sporocila = []
     return bottle.template('prijava.html', sporocila = sporocila)
+
 
 @bottle.post('/prijava')
 def prijava_post():
@@ -67,6 +72,7 @@ def prijava_post():
         sporocila = {'geslo': 'Prijava ni uspela. Poizkusite znova.'}
         return bottle.template('prijava.html', sporocila = sporocila)
 
+
 @bottle.get('/novo_narocilo')
 def novo_narocilo_get():
     u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
@@ -74,7 +80,10 @@ def novo_narocilo_get():
         bottle.redirect('/')
     else:
         zelenjavice = stanje.zelenjavica
-        return bottle.template('novo_narocilo.html', u_ime=u_ime, zelenjavice=zelenjavice, naroceno=[], korak ='priprava narocila')
+        return bottle.template('novo_narocilo.html', u_ime=u_ime,
+                               zelenjavice=zelenjavice, naroceno=[],
+                               korak='priprava narocila')
+
 
 @bottle.post('/novo_narocilo')
 def narocilo_post():
@@ -83,7 +92,7 @@ def narocilo_post():
         bottle.redirect('/')
     else:
         zelenjavice = stanje.zelenjavica
-        zelenjavice_narocene =[]
+        zelenjavice_narocene = []
         potrdi = False
         for zelenjava in zelenjavice:
             zelenjavica_narocena = {}
@@ -101,14 +110,24 @@ def narocilo_post():
         else:
             korak = bottle.request.forms.getunicode('korak')
             if korak == 'potrditev narocila':
-                return bottle.template('novo_narocilo.html', u_ime=u_ime, zelenjavice=zelenjavice, naroceno=zelenjavice_narocene, korak = 'potrditev narocila')
+                return bottle.template('novo_narocilo.html', u_ime=u_ime,
+                                       zelenjavice=zelenjavice,
+                                       naroceno=zelenjavice_narocene,
+                                       korak = 'potrditev narocila')
             elif korak == 'shrani narocilo':
                 sporocilo = str(bottle.request.forms.getunicode('sporocilo'))
-                narocilo = Narocilo(narocnik=u_ime, stanje='naroceno', naroceno=zelenjavice_narocene, sporocilo=sporocilo, datum_narocila=datetime.now())
+                narocilo = Narocilo(narocnik=u_ime, stanje='naroceno',
+                                    naroceno=zelenjavice_narocene,
+                                    sporocilo=sporocilo,
+                                    datum_narocila=datetime.now())
                 narocilo.shrani_v_datoteko()
-                return bottle.template('potrdi_narocilo.html', u_ime=u_ime, zelenjavice=zelenjavice, naroceno=zelenjavice_narocene, korak = 'shrani porocilo')
+                return bottle.template('potrdi_narocilo.html',
+                                       u_ime=u_ime, zelenjavice=zelenjavice,
+                                       naroceno=zelenjavice_narocene,
+                                       korak = 'shrani porocilo')
             else:
                 pass
+
 
 @bottle.get('/spremeni_podatke')
 def spremeni_podatke_get():
@@ -118,6 +137,7 @@ def spremeni_podatke_get():
         bottle.redirect('/')
     else:
         return bottle.template('spremeni_podatke.html', u_ime=u_ime, sporocila=sporocila)
+
 
 @bottle.post('/spremeni_podatke')
 def spremeni_podatke_post():
@@ -140,21 +160,23 @@ def spremeni_podatke_post():
             sporocila = {'uspesno': 'Ušpesno ste spremenili geslo.'}
             return bottle.template('spremeni_podatke.html', sporocila=sporocila)
 
+
 @bottle.get('/ponudba')
 def ponudba_get():
     u_ime = bottle.request.get_cookie('uporabnisko_ime', secret=SIFRA)
     slika = 'B_V3.jpg'
     return bottle.template('ponudba.html', u_ime=u_ime, picture=slika)
 
+
 @bottle.get('/images/<picture>')
 def images(picture):
     return bottle.static_file(picture, 'images')
+
 
 @bottle.get('/odjava')
 def odjava_get():
     bottle.response.delete_cookie('uporabnisko_ime', path='/', secret=SIFRA)
     bottle.redirect('/')
-
 
 
 bottle.run(debug=True, reloader=True)

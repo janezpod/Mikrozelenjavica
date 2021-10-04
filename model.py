@@ -1,4 +1,4 @@
-'''V model.py so implementirani razredi in vse funkcije, 
+'''V model.py so implementirani razredi in vse funkcije,
 ki se uporabljajo v spletnem vmesniku.
 '''
 
@@ -9,12 +9,12 @@ import os
 import json
 import hashlib
 from base64 import b64encode, b64decode
-from datetime import datetime
+
 
 def zakrij_geslo(geslo):
-    '''Sprejme geslo in na njem izvede zgoščevalno funkcijo z 
+    '''Sprejme geslo in na njem izvede zgoščevalno funkcijo z
     naključno generirano soljo. Sol in zgoščeno geslo vrne v obliki slovarja.
-    '''  
+    '''
     s = os.urandom(32)
     sol = b64encode(s).decode('UTF-8')
     k = hashlib.pbkdf2_hmac('sha256', geslo.encode('UTF-8'), s, 100000)
@@ -22,8 +22,10 @@ def zakrij_geslo(geslo):
     z_geslo = {'geslo': {'sol': sol, 'kljuc': kljuc}}
     return z_geslo
 
+
 class Stanje:
     '''Sledi stanju sistema.'''
+
     def __init__(self):
         self.uporavniki = []
         self.administratorji = []
@@ -44,10 +46,13 @@ class Stanje:
         {'zaporedno_stevilo': 12, 'vrsta': 'Ohrovt', 'cena': 2.5, 'cas_vzgoje': 10}
         ]   
 
+
 stanje = Stanje()
 
+
 class Narocilo:
-    def __init__(self, narocnik, narocil='', stevilka=1, naroceno=[], stanje='', sporocilo='', datum_narocila=''):
+    def __init__(self, narocnik, narocil='', stevilka=1, naroceno=[],
+                 stanje='', sporocilo='', datum_narocila=''):
         self.narocnik = narocnik
         self.stevilka = stevilka
         if narocil:
@@ -66,11 +71,13 @@ class Narocilo:
             'narocnik': self.narocnik,
             'narocil': self.narocil,
             'stanje': self.stanje,
-            'datum narocila': datum_narocila,        
-            'naroceno': [{'zaporedna stevilka': zel['zaporedno_stevilo'], 'vrsta': zel['vrsta'], 'stevilo': zel['stevilo'], 'cena': zel['cena']} \
-                for zel in self.naroceno if zel['stevilo']],
+            'datum narocila': datum_narocila,
+            'naroceno': [{'zaporedna stevilka': zel['zaporedno_stevilo'],
+                          'vrsta': zel['vrsta'], 'stevilo': zel['stevilo'],
+                          'cena': zel['cena']}
+                         for zel in self.naroceno if zel['stevilo']],
             'sporocilo': self.sporocilo
-        }       
+        }
 
     def shrani_v_datoteko(self):
         datoteka = 'narocila/narocila.json'
@@ -91,16 +98,16 @@ class Narocilo:
         for zapis in slovar:
             narocnik = zapis['narocnik']
             narocilo = Narocilo(narocnik)
-            narocilo.stevilka = zapis['stevilka narocila']           
+            narocilo.stevilka = zapis['stevilka narocila']
             narocilo.narocil = zapis['narocil']
             narocilo.stanje = zapis['stanje']
             narocilo.naroceno = [{'zaporedno_stevilo': x['zaporedna stevilka'],
-                                'vrsta': x['vrsta'], 
-                                'cena': x['cena'],
-                                'stevilo': x['stevilo']}
-                                for x in zapis['naroceno']]
-            narocilo.sporocilo = zapis['sporocilo']      
-            narocilo.datum_narocila = zapis['datum narocila'] 
+                                  'vrsta': x['vrsta'],
+                                  'cena': x['cena'],
+                                  'stevilo': x['stevilo']}
+                                 for x in zapis['naroceno']]
+            narocilo.sporocilo = zapis['sporocilo']
+            narocilo.datum_narocila = zapis['datum narocila']
             narocila.append(narocilo)
         return narocila
 
@@ -130,9 +137,9 @@ class Uporabnik:
             'u_geslo': self.u_geslo,
             'pravice': self.pravice
         }
-    
+
     def preberi_pravice(self):
-        '''Uporabniku določi atribut pravice, 
+        '''Uporabniku določi atribut pravice,
         ki ga prebere iz uporabnikove datoteke.
         '''
         datoteka = 'uporabniki/' + self.u_ime + '.json'
@@ -146,13 +153,13 @@ class Uporabnik:
         with open(datoteka, 'w', encoding='UTF-8') as dat:
             slovar = self.v_slovar()
             json.dump(slovar, dat, ensure_ascii=False, indent=4)
-            
+
     def spremeni_geslo(self, n_geslo):
         self.preberi_pravice()
         datoteka = 'uporabniki/' + self.u_ime + '.json'
         os.remove(datoteka)
         return Uporabnik(self.u_ime, n_geslo, pravice=self.pravice).shrani_v_datoteko()
-    
+
     def prijava(self):
         datoteka = 'uporabniki/' + self.u_ime + '.json'
         if os.path.isfile(datoteka) == False:
@@ -161,7 +168,7 @@ class Uporabnik:
             if self.preveri_geslo():
                 return True
             else:
-                return False                
+                return False
 
     def preveri_geslo(self):
         datoteka = 'uporabniki/' + self.u_ime + '.json'
@@ -174,9 +181,10 @@ class Uporabnik:
             return True
         else:
             return False
-    
+
+
     def zberi_narocila(self):
-        '''Iz vseh naročil izbere le tista, ki jih je 
+        '''Iz vseh naročil izbere le tista, ki jih je
         naročič uporabnik. Adminu poda vsa naročila.
         '''
         narocila = []
